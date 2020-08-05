@@ -120,21 +120,21 @@ public:
       attention_ = new typename Traits_::MultiHeadAttention(allocator_, batch_size_, from_seq_len_, to_seq_len_, head_num_, size_per_head_);
       FILE *fd = fopen("gemm_config.in", "r");
       int err = 0;
-      if (fd == NULL)
-        printf("gemm_config.in is not found\n");
-      else
+      if (fd == NULL) {
+        //printf("gemm_config.in is not found\n");
+      } else
       {
         err = fscanf(fd, "%d%d%d%*d%*d", &cublasAlgo_[0], &cublasAlgo_[1], &cublasAlgo_[2]);
         fclose(fd);
       }
       if (err != 3)
       {
-        printf("loading GEMM algorithms error, using default GEMM algorithms!\n");
+        //printf("loading GEMM algorithms error, using default GEMM algorithms!\n");
         if (Traits_::OpType == OperationType::FP32)
         {
-          cublasAlgo_[0] = -1;
-          cublasAlgo_[1] = -1;
-          cublasAlgo_[2] = -1;
+          cublasAlgo_[0] = CUBLAS_GEMM_DEFAULT_TENSOR_OP;
+          cublasAlgo_[1] = CUBLAS_GEMM_DEFAULT_TENSOR_OP;
+          cublasAlgo_[2] = CUBLAS_GEMM_DEFAULT_TENSOR_OP;
         }
         else
         {

@@ -101,9 +101,11 @@ if __name__ == "__main__":
                     op_encoder_result_val, atol_threshold)
 
         if args.test_time == 1:
-            ite = 100
+            ite = 150
             tf_time = time_test(sess, tf_encoder_result, ite)
             op_time = time_test(sess, op_encoder_result, ite)
 
             print("[INFO] TF encoder time costs: {} ms".format(tf_time))
             print("[INFO] OP encoder time costs: {} ms".format(op_time))
+            with open("log.txt", "a") as of:
+                of.write(str(batch_size) + "," + str(seq_len) + "," + str(tf_time) + "," + str(op_time) + "\n")

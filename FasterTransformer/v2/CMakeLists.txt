@@ -17,11 +17,11 @@ project(FasterTransformer LANGUAGES CXX CUDA)
 find_package(CUDA 10.0 REQUIRED)
 
 option(BUILD_TRT "Build in TensorRT mode" OFF)
-option(BUILD_TF "Build in TensorFlow mode" OFF)
+option(BUILD_TF "Build in TensorFlow mode" ON)
 
 set(CUDA_PATH ${CUDA_TOOLKIT_ROOT_DIR})
 
-set(TF_PATH "" CACHE STRING "TensorFlow path")
+set(TF_PATH "/opt/miniconda3/lib/python3.7/site-packages/tensorflow" CACHE STRING "TensorFlow path")
 #set(TF_PATH "/usr/local/lib/python3.5/dist-packages/tensorflow")
 
 if(BUILD_TF AND NOT TF_PATH)
